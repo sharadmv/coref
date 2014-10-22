@@ -1,0 +1,22 @@
+<div class='annotation-box'>
+    <h2 class='text-center'>
+        Do these two phrases refer to the same thing? 
+    </h2>
+    <div class='row text-center phrase-box'>
+        <div class='col-md-6'>
+            <span class='phrase-text'>{{phrase_text[0]}}</span>
+        </div>
+        <div class='col-md-6'>
+            <span class='phrase-text'>{{phrase_text[1]}}</span>
+        </div>
+    </div>
+    <div class='row top-buffer'/>
+    <div class='row text-center'>
+        <div class='col-md-6'>
+            <button ng-click="annotate(true)" class='big-button btn btn-lg btn-success'>Yes</button>
+        </div>
+        <div class='col-md-6'>
+            <button ng-click="annotate(false)" class='big-button btn btn-lg btn-primary'>No</button>
+        </div>
+    </div>
+</div>

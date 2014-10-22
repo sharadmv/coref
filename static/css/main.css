@@ -1,0 +1,45 @@
+.question-viewer {
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    border-radius: 4px;
+    font-size: 1.1em;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    line-height: 2em;
+}
+
+.annotation-box {
+    background-color: #F4F4FD;
+    border: 1px solid #e1e1e8;
+    border-radius: 4px;
+    padding: 5px
+}
+
+.text-highlight {
+    font-weight: 900;
+    color: black;
+    background-color: #C3E3FF;
+    border-radius: 2px;
+}
+
+.phrase-box {
+    padding: 15px;
+}
+
+.phrase-text {
+    padding: 15px;
+    font-size: 1.5em;
+    font-weight: 900;
+    color: black;
+    background-color: white;
+    border: 1px solid #e1e1e8;
+    border-radius: 4px;
+}
+
+.top-buffer {
+    margin-top: 20px;
+}
+
+.big-button {
+    font-size: 1.3em;
+}
