@@ -1,0 +1,69 @@
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">Login or Register</h3>
+    </div>
+    <div class="modal-body">
+        <div ng-show="showLogin">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h4>Login</h4>
+                    <div class="well">
+                        <form>
+                            <div class="form-group">
+                                <label for="username" class="control-label">Username</label>
+                                <input ng-model="loginInfo.username" type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter your username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="control-label">Password</label>
+                                <input ng-model="loginInfo.password" type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password">
+                            </div>
+                            <div ng-show="showLoginError" role="alert" class="alert alert-danger">Wrong username or password</div>
+                            <button ng-click="login()" class="btn btn-success btn-block">Login</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <p class="lead">Don't have a username?</span></p>
+                    <p><a ng-click="openRegister()" class="btn btn-info btn-block">Register now!</a></p>
+                </div>
+            </div>
+        </div>
+        <div ng-show="!showLogin">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h4>Register</h4>
+                    <div class="well">
+                        <form>
+                            <div class="form-group">
+                                <label for="username" class="control-label">Username</label>
+                                <input ng-model="registerInfo.username" type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter your username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="control-label">Password</label>
+                                <input ng-model="registerInfo.password" type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password">
+                            </div>
+                            <div class="form-group">
+                                <label for="firstName" class="control-label">First Name</label>
+                                <input ng-model="registerInfo.first_name" type="text" class="form-control" id="firstName" name="first_name" value="" required="" title="Please enter your first name">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" class="control-label">Last Name</label>
+                                <input ng-model="registerInfo.last_name" type="text" class="form-control" id="lastName" name="last_name" value="" required="" title="Please enter your last name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="control-label">Email</label>
+                                <input ng-model="registerInfo.email" type="email" class="form-control" id="email" name="email" value="" required="" title="Please enter your email">
+                            </div>
+                            <div ng-show="showRegisterError" role="alert" class="alert alert-danger">Error: {{registerMessage}}</div>
+                            <button ng-click="register()" class="btn btn-success btn-block">Register</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <p class="lead">Already have a username?</span></p>
+                    <p><a ng-click="openLogin()" class="btn btn-info btn-block">Login now!</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
