@@ -1,3 +1,4 @@
 <div class='question-viewer'>
-    <span ng-repeat="part in question_parts" ng-class="{'text-highlight': part.highlight}">{{part.text}}</span>
+    <span ng-if="noQuestions">No questions left!</span>
+    <span ng-if="!noQuestions" ng-repeat="part in question_parts" ng-class="{'text-highlight': part.highlight}">{{part.text}}</span>
 </div>

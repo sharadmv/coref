@@ -1,4 +1,4 @@
-<div class='annotation-box'>
+<div ng-if="!noQuestions" class='annotation-box'>
     <h2 class='text-center'>
         Do these two phrases refer to the same thing? 
     </h2>
@@ -13,7 +13,7 @@
     <div class='row top-buffer'/>
     <div class='row text-center'>
         <div class='col-md-6'>
-            <button ng-click="annotate(true)" class='big-button btn btn-lg btn-success'>Yes</button>
+          <button ng-class="{'!loggedIn':'disabled'}" ng-click="annotate(true)" class='big-button btn btn-lg btn-success'>Yes</button>
         </div>
         <div class='col-md-6'>
             <button ng-click="annotate(false)" class='big-button btn btn-lg btn-primary'>No</button>

@@ -2,41 +2,73 @@ qb.controller('AnnotationController', ['$scope', 'Question', function($scope, Qu
 
     $scope.annotate = function(result) {
         Question.annotate({
-            id: $scope.question.id,
-            phrases: $scope.question.phrases,
+            question_id: $scope.question.question_id,
+            mention_pair_id: $scope.mentionPairs[$scope.currentPair].mention_pair_id,
             result: result
-        })
+        }, function(){
+          if ($scope.currentPair < $scope.mentionPairs.length - 1) {
+            $scope.currentPair++;
+            $scope.loadPair();
+          } else {
+            $scope.fetch();
+          }
+        });
     }
 
-    Question.fetch(function(result) {
-        $scope.question = result;
-        $scope.question_parts = [];
-        $scope.phrase_text = [];
+    $scope.fetch = function() {
+      Question.fetch(function(result) {
+          $scope.data = result;
+          $scope.question = $scope.data.question;
+          $scope.mentionPairs = $scope.data.mention_pairs;
 
-        var index = 0;
-        for (var i = 0; i < result.phrases.length; i++) {
-            var phrase = result.phrases[i];
-            var beforeText = $scope.question.text.slice(index, phrase[0]);
-            var phraseText = $scope.question.text.slice(phrase[0], phrase[1]);
-            $scope.phrase_text.push(phraseText);
-            $scope.question_parts.push({
-                highlight: false,
-                type: 'raw',
-                text: beforeText
-            });
-            $scope.question_parts.push({
-                highlight: true,
-                type: 'highlight',
-                text: phraseText
-            });
-            index = phrase[1];
-        }
-        var afterText = $scope.question.text.slice(index);
-        $scope.question_parts.push({
-            type: 'raw',
-            text: afterText
-        });
-    });
+          $scope.currentPair = 0;
+          $scope.loadPair();
+      }, function() {
+      });
+    }
+
+    $scope.loadPair = function() {
+      $scope.question_parts = [];
+      $scope.phrase_text = [];
+
+      if ($scope.mentionPairs.length == 0) {
+        $scope.noQuestions = true;
+        return;
+      }
+
+      var index = 0;
+      var curPair = $scope.mentionPairs[$scope.currentPair];
+
+      var mentions = [curPair.mention1, curPair.mention2].sort(function(m) {
+        return -m.pos_start;
+      })
+
+
+      for (var i = 0; i < mentions.length; i++) {
+          var phrase = mentions[i];
+          var beforeText = $scope.question.text.slice(index, phrase.pos_start);
+          var phraseText = $scope.question.text.slice(phrase.pos_start, phrase.pos_end);
+          $scope.phrase_text.push(phraseText);
+          $scope.question_parts.push({
+              highlight: false,
+              type: 'raw',
+              text: beforeText
+          });
+          $scope.question_parts.push({
+              highlight: true,
+              type: 'highlight',
+              text: phraseText
+          });
+          index = phrase.pos_end;
+      }
+      var afterText = $scope.question.text.slice(index);
+      $scope.question_parts.push({
+          type: 'raw',
+          text: afterText
+      });
+    }
+
+    $scope.fetch($scope.loadPair);
 }])
 
 qb.controller('QuestionViewController', function($scope) {

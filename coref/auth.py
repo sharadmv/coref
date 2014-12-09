@@ -12,7 +12,8 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    return session().query(User).get(user_id)
+    with session() as sess:
+        return sess.query(User).get(user_id)
 
 class Anonymous(AnonymousUserMixin):
     def __init__(self):
@@ -22,9 +23,6 @@ class Anonymous(AnonymousUserMixin):
         return {}
 
 login_manager.anonymous_user = Anonymous
-
-
-
 
 class Login(form.Form):
     username = fields.TextField(validators=[validators.required()])
@@ -40,7 +38,8 @@ class Login(form.Form):
             raise validators.ValidationError('Invalid username or password')
 
     def get_user(self):
-        return session().query(User).filter_by(username=self.username.data).first()
+        with session() as sess:
+            return sess.query(User).filter_by(username=self.username.data).first()
 
 
 class Register(form.Form):
@@ -51,5 +50,6 @@ class Register(form.Form):
     password = fields.PasswordField(validators=[validators.required()])
 
     def validate_login(self):
-        if session().query(User).filter_by(username=self.username.data).count() > 0:
-            raise validators.ValidationError('duplicate username')
+        with session() as sess:
+            if sess.query(User).filter_by(username=self.username.data).count() > 0:
+                raise validators.ValidationError('duplicate username')
