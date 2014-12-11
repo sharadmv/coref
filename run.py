@@ -5,7 +5,7 @@ import argparse
 import coref
 
 def start(args):
-    coref.listen(args.port)
+    coref.listen(args.port, host='0.0.0.0')
 
 if __name__ == "__main__":
     argparser = argparse.ArgumentParser()

@@ -8,6 +8,6 @@ import auth
 import urls
 import api
 
-def listen(port=8080, debug=True):
+def listen(port=8080, debug=True, host='127.0.0.1'):
     app.debug = True
-    app.run(port=port)
+    app.run(host=host, port=port)

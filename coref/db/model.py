@@ -39,7 +39,6 @@ class Coref(Base):
     same = Column("same", Boolean, nullable=False)
     author = Column("author", ForeignKey("user.user_id"), nullable=False)
     date_added = Column("date_added", DateTime, default=datetime.datetime.utcnow(), nullable=False)
-    UniqueConstraint('mention_pair_id', 'author', name='no_dups')
 
 class User(Base):
     __tablename__ = "user"
